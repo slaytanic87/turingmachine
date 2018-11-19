@@ -32,7 +32,7 @@ java -jar turingmachine-1.0-SNAPSHOT-uber.jar
 
 #### Programming Syntax
 
-STATE INPUT_SYMBOLS -> WRITE_SYMBOLS NEXT_STATE MOVEMENTS
+STATE INPUT_SYMBOLS -> WRITE_SYMBOLS NEXT_STATE MOVEMENTS  
 Example:
 
 ```code
