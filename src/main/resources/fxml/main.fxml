@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="694.0" style="-fx-background-color: #2E9AFE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.turingfx.controller.MainController">
+   <children>
+      <Pane layoutX="8.0" layoutY="85.0" prefHeight="434.0" prefWidth="212.0">
+         <children>
+            <TextArea fx:id="txtAreaEditor" prefHeight="432.0" prefWidth="212.0">
+               <effect>
+                  <ColorAdjust brightness="0.22" contrast="0.27" hue="0.27" saturation="0.29" />
+               </effect></TextArea>
+         </children>
+      </Pane>
+      <Pane layoutX="226.0" layoutY="85.0" prefHeight="432.0" prefWidth="459.0" style="-fx-background-color: #5882FA;">
+         <children>
+            <Canvas fx:id="trackCanvas" height="432.0" layoutX="3.0" width="459.0" />
+         </children>
+      </Pane>
+      <Separator layoutX="8.0" layoutY="78.0" prefHeight="3.0" prefWidth="677.0" />
+      <Pane layoutX="8.0" layoutY="4.0" prefHeight="70.0" prefWidth="677.0" style="-fx-background-color: #5882FA;">
+         <children>
+            <Label layoutX="6.0" layoutY="7.0" text="Current state" />
+            <Label fx:id="lblCurrentState" layoutX="106.0" layoutY="6.0" text="--" textFill="#f24000" />
+            <Label layoutX="30.0" layoutY="37.0" text="Tapes" />
+            <Label fx:id="lblNumberOfTapes" layoutX="106.0" layoutY="38.0" text="0" textFill="#0400ff" />
+            <Label layoutX="220.0" layoutY="7.0" text="States" />
+            <TextField fx:id="edtStates" editable="false" layoutX="266.0" layoutY="2.0" opacity="0.47" prefHeight="31.0" prefWidth="408.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <Label fx:id="lblStatus" layoutX="267.0" layoutY="39.0" text="N/A" />
+            <Label layoutX="219.0" layoutY="39.0" text="Status" />
+         </children>
+      </Pane>
+      <Button fx:id="btnStep" layoutX="227.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onStepClick" style="-fx-background-color: #99ff66;" text="Step" />
+      <Button fx:id="btnAddTape" layoutX="532.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onAddTape" style="-fx-background-color: #ffffff;" text="Add tape" />
+      <Button fx:id="btnReset" layoutX="625.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onResetClick" style="-fx-background-color: #ff3300;" text="Reset" />
+      <Button fx:id="btnParse" layoutX="9.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onParseClick" style="-fx-background-color: #ffff00;" text="Parse" />
+      <Button layoutX="179.0" layoutY="529.0" mnemonicParsing="false" onAction="#onOpenInfo" prefHeight="31.0" prefWidth="39.0" style="-fx-background-color: #FFFFFF;" text="i" textFill="#002bff">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

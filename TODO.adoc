@@ -1,0 +1,34 @@
+= Todo Turing Machine Fx
+
+== Version 0.1
+
+=== Infinite Tape size
+
+The tape size can be arbitrary set, current it is limited to 13 cells.
+More over head should be "infinitely" able to move to the left and right side
+
+* DONE
+
+=== Visualization for head pointer
+
+Draw head pointer for every tape
+
+* DONE
+
+=== Option for Automatic simulation
+
+The simulation should run as long as the END state is reached.
+
+* TODO
+
+=== Visualize state transition as a graph
+
+The ability to visiualize the transitions between the states in the state register.
+
+* TODO
+
+=== Create info dialog
+
+create an info dialog.
+
+* IN PROGRESS
