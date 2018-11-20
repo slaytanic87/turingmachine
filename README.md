@@ -81,6 +81,28 @@ S2 < -> < END N
 
 result: `>aaabbb<`
 
+##### 1 Tape TM
+
+Given a context-free language  
+
+`L(G) = { a^n -> a^2*n | n ∈ ℕ and n ≥ 1 }`  
+
+```console
+START a -> § S1 R
+S1 a -> a S1 R
+S1 # -> b S2 L
+S1 b -> b S1 R
+S2 b -> b S2 L
+S2 § -> § S4 N
+S2 a -> a S3 L
+S3 a -> a S3 L
+S3 § -> § START R
+S4 § -> b S4 L
+S4 # -> # S5 R
+S5 b -> a S5 R
+S5 # -> # END N 
+```
+
 ##### 3 Tape TM
 
 Given a context-sensitive language  
