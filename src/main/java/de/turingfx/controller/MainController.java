@@ -8,6 +8,7 @@ import de.turingfx.model.state.StateStatus;
 import de.turingfx.model.turing.Cell;
 import de.turingfx.model.turing.Tape;
 import de.turingfx.model.turing.TuringModel;
+import de.turingfx.view.HeadAnimation;
 import de.turingfx.view.TapeInputDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -64,6 +66,8 @@ public class MainController implements Initializable {
 
     private GraphicsContext trackGraphicsContext;
 
+    private List<HeadAnimation> headAnimationList = new ArrayList<>();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         trackGraphicsContext = trackCanvas.getGraphicsContext2D();
@@ -82,16 +86,6 @@ public class MainController implements Initializable {
         drawCellTextValue(topLeftpos, tapeContent);
     }
 
-    public void drawHighlightRect(Point2D topLeftPos, Cell tapeContent) {
-        trackGraphicsContext.setFill(Color.BLUE);
-        // shrink rect to visualize contour
-        trackGraphicsContext.fillRect(topLeftPos.getX(), topLeftPos.getY(),
-                CELL_SIZE - 2,
-                CELL_SIZE - 2);
-
-        drawCellTextValue(topLeftPos, tapeContent);
-    }
-
     private void drawCellTextValue(Point2D topLeftPos, Cell tapeContent) {
         trackGraphicsContext.setFill(tapeContent.getFontColor());
         trackGraphicsContext.fillText(tapeContent.getAlphabet(),
@@ -100,6 +94,7 @@ public class MainController implements Initializable {
     }
 
     public void clearFieldCanvas() {
+        clearHeadAnimation();
         trackGraphicsContext.clearRect(0, 0, trackCanvas.getWidth(), trackCanvas.getHeight());
     }
 
@@ -118,7 +113,8 @@ public class MainController implements Initializable {
             double cols = 0;
             for (Cell cell: tape.getCellsInRange()) {
                 if (cell.isFlagged()) {
-                    drawHighlightRect(pos, cell);
+                    headAnimationList.add(new HeadAnimation()
+                            .createHeadAnimation(trackGraphicsContext, pos, cell).play());
                     drawHeadPointer(pos);
                 } else {
                     drawRectWithContour(pos, cell);
@@ -166,6 +162,13 @@ public class MainController implements Initializable {
         double textWidth = boxName.getBoundsInLocal().getWidth();
         trackGraphicsContext.fillText(boxName.getText(), tapeWidth + (boxWidth - textWidth) / 2,
                 PADDING_Y + (boxHeight / 2));
+    }
+
+    private void clearHeadAnimation() {
+        for (HeadAnimation headAnimation: headAnimationList) {
+            headAnimation.stop();
+        }
+        headAnimationList.clear();
     }
 
     public void drawField() throws TuringMachineException {

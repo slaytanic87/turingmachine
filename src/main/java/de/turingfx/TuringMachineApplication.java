@@ -1,6 +1,7 @@
 package de.turingfx;
 
 import de.turingfx.controller.MaintainControllerInstances;
+import de.turingfx.controller.TuringMachine;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,11 @@ public class TuringMachineApplication extends Application {
         });
 
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() {
+        TuringMachine.getInstance().reset();
     }
 
     public static void main(String... args) {
