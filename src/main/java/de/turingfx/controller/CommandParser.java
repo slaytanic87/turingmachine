@@ -123,7 +123,10 @@ public class CommandParser {
         }
         if (!stateStr.matches("[A-Z0-9]+")) {
             throw new CmdException("Line " + cmdLine.getLine()
-                    + " The state should be written as upper case: " + stateStr);
+                    + " The state should be written as upper case or does not matched with the expression [A-Z0-9]: "
+                    + stateStr
+                    + "\nthis also be possible that the number of tapes does not correspond \n"
+                    + "with the number of tapes defined in the code!");
         }
     }
 
