@@ -1,6 +1,6 @@
 = Todo Turing Machine Fx
 
-== Version 0.1
+== Version 1.0
 
 === Infinite Tape size
 
@@ -15,20 +15,24 @@ Draw head pointer for every tape
 
 * DONE
 
-=== Option for Automatic simulation
-
-The simulation should run as long as the END state is reached.
-
-* TODO
-
-=== Visualize state transition as a graph
-
-The ability to visiualize the transitions between the states in the state register.
-
-* TODO
-
 === Create info dialog
 
 create an info dialog.
 
-* IN PROGRESS
+* DONE
+
+== Version 1.1
+
+=== Option for Automatic simulation
+
+The simulation should run as long as the END state is reached.
+
+* DONE
+
+== Version 1.2
+
+=== Visualize state transition as a graph
+
+The ability to visualize the transitions between the states in the state register.
+
+* TODO

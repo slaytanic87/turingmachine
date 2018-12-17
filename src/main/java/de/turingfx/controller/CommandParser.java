@@ -56,15 +56,9 @@ public class CommandParser {
         checkAlphabet(alphabet, cmdLine);
         checkState(state, cmdLine);
 
-        StateType stateType = StateType.NORMAL;
-
-        if (state.equalsIgnoreCase(START_STATE_NAME)) {
-            stateType = StateType.START;
-        }
-
         cmdLine.setCurrentState(State.builder()
                 .name(state)
-                .stateType(stateType)
+                .stateType(state.equalsIgnoreCase(START_STATE_NAME) ? StateType.START : StateType.NORMAL)
                 .transitionsActions(new HashMap<>())
                 .transitionsWrite(new HashMap<>())
                 .transitionsState(new HashMap<>()).build());
@@ -89,15 +83,10 @@ public class CommandParser {
 
         checkState(state, cmdLine);
 
-        StateType stateType = StateType.NORMAL;
-        if (state.equalsIgnoreCase(END_STATE_NAME)) {
-            stateType = StateType.END;
-        }
-
         cmdLine.setWriteAlphabet(alphabet);
         cmdLine.setNextState(State.builder()
                 .name(state)
-                .stateType(stateType)
+                .stateType(state.equalsIgnoreCase(END_STATE_NAME) ? StateType.END : StateType.NORMAL)
                 .transitionsActions(new HashMap<>())
                 .transitionsWrite(new HashMap<>())
                 .transitionsState(new HashMap<>()).build());
@@ -125,8 +114,8 @@ public class CommandParser {
             throw new CmdException("Line " + cmdLine.getLine()
                     + " The state should be written as upper case or does not matched with the expression [A-Z0-9]: "
                     + stateStr
-                    + "\nthis also be possible that the number of tapes does not correspond \n"
-                    + "with the number of tapes defined in the code!");
+                    + "\nthis can also be possible that the number of tapes does not correspond \n"
+                    + "with the number of tapes defined in the rule table!");
         }
     }
 

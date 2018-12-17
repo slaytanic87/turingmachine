@@ -20,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -64,13 +65,23 @@ public class MainController implements Initializable {
     @FXML
     private Button btnAddTape;
 
+    @FXML
+    private Button btnStart;
+
+    @FXML
+    private Button btnPause;
+
     private GraphicsContext trackGraphicsContext;
 
     private List<HeadAnimation> headAnimationList = new ArrayList<>();
 
+    private ApplicationLoop applicationLoop;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         trackGraphicsContext = trackCanvas.getGraphicsContext2D();
+        applicationLoop = new ApplicationLoop(TuringMachine.getInstance());
+        applicationLoop.setDuration(Duration.millis(500));
         lblStatus.setTextFill(Color.RED);
         resetButtons();
     }
@@ -183,26 +194,40 @@ public class MainController implements Initializable {
         try {
             StateStatus stateStatus = TuringMachine.getInstance().iterateStep();
             drawField();
-            lblStatus.setTextFill(Color.GREEN);
-            lblStatus.setText(stateStatus.getLabel());
-            lblCurrentState.setText(TuringMachine.getInstance().getCurrentState().getName());
+            switch (stateStatus) {
+                case NEXT_STATE_AVAILABLE:
+                    btnParse.setDisable(true);
+                    break;
+                case END_STATE_REACHED:
+                case INTERNAL_ERROR:
+                case DECLINED:
+                    btnParse.setDisable(false);
+                    break;
+                default:
+                    throw new TuringMachineException("Unknown state status: " + stateStatus);
+            }
+            setLabels(stateStatus, Color.GREEN);
         } catch (UndefinedStateTransitionException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("State trasition error");
             alert.setContentText(e.getLocalizedMessage());
             alert.showAndWait();
-            lblStatus.setTextFill(Color.RED);
-            lblStatus.setText(StateStatus.DECLINED.getLabel());
+            setLabels(StateStatus.DECLINED, Color.RED);
         } catch (TuringMachineException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Processing error");
             alert.setContentText(e.getLocalizedMessage());
             alert.showAndWait();
-            lblStatus.setTextFill(Color.RED);
-            lblStatus.setText(StateStatus.INTERNAL_ERROR.getLabel());
+            setLabels(StateStatus.INTERNAL_ERROR, Color.RED);
         }
+    }
+
+    public void setLabels(StateStatus stateStatus, Color color) {
+        lblStatus.setTextFill(color);
+        lblStatus.setText(stateStatus.getLabel());
+        lblCurrentState.setText(TuringMachine.getInstance().getCurrentState().getName());
     }
 
     @FXML
@@ -215,6 +240,8 @@ public class MainController implements Initializable {
                     .getCurrentState().getName());
             btnAddTape.setDisable(true);
             btnStep.setDisable(false);
+            btnStart.setDisable(false);
+            btnPause.setDisable(false);
             txtAreaEditor.setEditable(false);
         } catch (CmdException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -223,17 +250,24 @@ public class MainController implements Initializable {
             alert.setContentText(e.getLocalizedMessage());
             alert.showAndWait();
             btnStep.setDisable(true);
+            btnStart.setDisable(true);
+            btnPause.setDisable(true);
             txtAreaEditor.setEditable(true);
         }
     }
 
-    public void throwErrorDialog(String message) {
+    public void throwErrorDialog(String message, boolean showAndWait) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("An error occurred");
         alert.setContentText(message);
-        alert.showAndWait();
+        if (showAndWait) {
+            alert.showAndWait();
+        } else {
+            alert.show();
+        }
     }
+
 
     @FXML
     private void onAddTape(MouseEvent mouseEvent) {
@@ -270,13 +304,26 @@ public class MainController implements Initializable {
         try {
             drawField();
         } catch (TuringMachineException e) {
-            throwErrorDialog(e.getLocalizedMessage());
+            throwErrorDialog(e.getLocalizedMessage(), true);
         }
+    }
+
+    @FXML
+    private void onStartAction(ActionEvent actionEvent) {
+        log.debug("on start clicked!");
+        applicationLoop.start();
+    }
+
+    @FXML
+    private void onPauseAction(ActionEvent actionEvent) {
+        log.debug("on stop clicked!");
+        applicationLoop.stop();
     }
 
     @FXML
     private void onResetClick(MouseEvent mouseEvent) {
         log.debug("on reset clicked!");
+        applicationLoop.stop();
         reset();
     }
 
@@ -301,6 +348,8 @@ public class MainController implements Initializable {
     private void resetButtons() {
         btnParse.setDisable(true);
         btnStep.setDisable(true);
+        btnStart.setDisable(true);
+        btnPause.setDisable(true);
         btnAddTape.setDisable(false);
     }
 }

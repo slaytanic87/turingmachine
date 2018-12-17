@@ -39,14 +39,16 @@
             <Label layoutX="219.0" layoutY="39.0" text="Status" />
          </children>
       </Pane>
-      <Button fx:id="btnStep" layoutX="227.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onStepClick" style="-fx-background-color: #99ff66;" text="Step" />
-      <Button fx:id="btnAddTape" layoutX="532.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onAddTape" style="-fx-background-color: #ffffff;" text="Add tape" />
-      <Button fx:id="btnReset" layoutX="625.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onResetClick" style="-fx-background-color: #ff3300;" text="Reset" />
+      <Button fx:id="btnStep" layoutX="290.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onStepClick" style="-fx-background-color: #99ff66;" text="Step" />
+      <Button fx:id="btnAddTape" layoutX="602.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onAddTape" style="-fx-background-color: #ffffff;" text="Add tape" />
+      <Button fx:id="btnReset" layoutX="415.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onResetClick" style="-fx-background-color: #ff3300;" text="Reset" />
       <Button fx:id="btnParse" layoutX="9.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onParseClick" style="-fx-background-color: #ffff00;" text="Parse" />
       <Button layoutX="179.0" layoutY="529.0" mnemonicParsing="false" onAction="#onOpenInfo" prefHeight="31.0" prefWidth="39.0" style="-fx-background-color: #FFFFFF;" text="i" textFill="#002bff">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
+      <Button fx:id="btnStart" layoutX="226.0" layoutY="529.0" mnemonicParsing="false" onAction="#onStartAction" prefHeight="31.0" prefWidth="56.0" style="-fx-background-color: #00f600;" text="Start" />
+      <Button fx:id="btnPause" layoutX="348.0" layoutY="529.0" mnemonicParsing="false" onAction="#onPauseAction" style="-fx-background-color: #ffff00;" text="Pause" />
    </children>
 </AnchorPane>
