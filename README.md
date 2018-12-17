@@ -39,7 +39,7 @@ Example:
 ```code
 S1 a -> b S2 R
 ```
-Explanation: On state `S1` when `a` was read, write `b` and then shift the head to the right and go to state `S2`.
+Explanation: On state `S1` when `a` was read, write `b` and then shift the head to the right `R` and go to state `S2`.
 
 ##### Predefined syntax
 
