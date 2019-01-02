@@ -10,17 +10,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="694.0" style="-fx-background-color: #2E9AFE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.turingfx.controller.MainController">
    <children>
-      <Pane layoutX="8.0" layoutY="85.0" prefHeight="434.0" prefWidth="212.0">
+      <Pane layoutX="8.0" layoutY="85.0" prefHeight="434.0" prefWidth="212.0" />
+      <Pane layoutX="8.0" layoutY="85.0" prefHeight="432.0" prefWidth="677.0" style="-fx-background-color: #5882FA;">
          <children>
-            <TextArea fx:id="txtAreaEditor" prefHeight="432.0" prefWidth="212.0">
-               <effect>
-                  <ColorAdjust brightness="0.22" contrast="0.27" hue="0.27" saturation="0.29" />
-               </effect></TextArea>
-         </children>
-      </Pane>
-      <Pane layoutX="226.0" layoutY="85.0" prefHeight="432.0" prefWidth="459.0" style="-fx-background-color: #5882FA;">
-         <children>
-            <Canvas fx:id="trackCanvas" height="432.0" layoutX="3.0" width="459.0" />
+            <Canvas fx:id="trackCanvas" height="432.0" width="677.0" />
          </children>
       </Pane>
       <Separator layoutX="8.0" layoutY="78.0" prefHeight="3.0" prefWidth="677.0" />
@@ -39,16 +32,20 @@
             <Label layoutX="219.0" layoutY="39.0" text="Status" />
          </children>
       </Pane>
-      <Button fx:id="btnStep" layoutX="290.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onStepClick" style="-fx-background-color: #99ff66;" text="Step" />
+      <Button fx:id="btnStep" layoutX="309.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onStepClick" style="-fx-background-color: #99ff66;" text="Step" />
       <Button fx:id="btnAddTape" layoutX="602.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onAddTape" style="-fx-background-color: #ffffff;" text="Add tape" />
-      <Button fx:id="btnReset" layoutX="415.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onResetClick" style="-fx-background-color: #ff3300;" text="Reset" />
-      <Button fx:id="btnParse" layoutX="9.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onParseClick" style="-fx-background-color: #ffff00;" text="Parse" />
-      <Button layoutX="179.0" layoutY="529.0" mnemonicParsing="false" onAction="#onOpenInfo" prefHeight="31.0" prefWidth="39.0" style="-fx-background-color: #FFFFFF;" text="i" textFill="#002bff">
+      <Button fx:id="btnReset" layoutX="434.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onResetClick" style="-fx-background-color: #ff3300;" text="Reset" />
+      <Button fx:id="btnParse" layoutX="88.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onParseClick" style="-fx-background-color: #ffff00;" text="Compile" />
+      <Button layoutX="199.0" layoutY="529.0" mnemonicParsing="false" onAction="#onOpenInfo" prefHeight="31.0" prefWidth="39.0" style="-fx-background-color: #FFFFFF;" text="i" textFill="#002bff">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnStart" layoutX="226.0" layoutY="529.0" mnemonicParsing="false" onAction="#onStartAction" prefHeight="31.0" prefWidth="56.0" style="-fx-background-color: #00f600;" text="Start" />
-      <Button fx:id="btnPause" layoutX="348.0" layoutY="529.0" mnemonicParsing="false" onAction="#onPauseAction" style="-fx-background-color: #ffff00;" text="Pause" />
+      <Button fx:id="btnStart" layoutX="245.0" layoutY="529.0" mnemonicParsing="false" onAction="#onStartAction" prefHeight="31.0" prefWidth="56.0" style="-fx-background-color: #00f600;" text="Start" />
+      <Button fx:id="btnPause" layoutX="367.0" layoutY="529.0" mnemonicParsing="false" onAction="#onPauseAction" style="-fx-background-color: #ffff00;" text="Pause" />
+      <Button fx:id="btnCode" layoutX="9.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#onEditorClick" text="{ Code }" textFill="#c507ebf5">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class Tape {
 
-    public static final int MAX_VISIBLE_CELLS = 13;
+    public static final int MAX_VISIBLE_CELLS = 20;
 
     private int viewRangeMinPos;
     private int viewRangeMaxPos;

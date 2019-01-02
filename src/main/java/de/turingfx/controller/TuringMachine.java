@@ -12,6 +12,7 @@ import de.turingfx.model.turing.Movement;
 import de.turingfx.model.turing.Tape;
 import de.turingfx.model.turing.TuringModel;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,6 +36,10 @@ public class TuringMachine {
     private CommandParser commandParser;
 
     private StateRegister stateService;
+
+    @Getter
+    @Setter
+    private String codeStr = StringUtils.EMPTY;
 
     private TuringMachine() {
         turingModel = new TuringModel();
@@ -143,8 +148,8 @@ public class TuringMachine {
         return StateStatus.NEXT_STATE_AVAILABLE;
     }
 
-    public void parseAndDetermineState(String cmdLines) throws CmdException {
-        List<CmdLine> commands = commandParser.parseCommandLines(cmdLines);
+    public void parseAndDetermineState() throws CmdException {
+        List<CmdLine> commands = commandParser.parseCommandLines(codeStr);
         stateService.determineStates(commands);
     }
 }

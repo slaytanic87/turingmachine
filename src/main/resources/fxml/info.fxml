@@ -15,7 +15,7 @@
                   <Image url="@assets/tm.png" />
                </image>
             </ImageView>
-            <Label layoutX="8.0" layoutY="120.0" text="Turing Machine Fx 1.1">
+            <Label layoutX="8.0" layoutY="120.0" text="Build v1.2">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

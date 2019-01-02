@@ -8,6 +8,7 @@ import de.turingfx.model.state.StateStatus;
 import de.turingfx.model.turing.Cell;
 import de.turingfx.model.turing.Tape;
 import de.turingfx.model.turing.TuringModel;
+import de.turingfx.view.CodeEditorDialog;
 import de.turingfx.view.HeadAnimation;
 import de.turingfx.view.TapeInputDialog;
 import javafx.event.ActionEvent;
@@ -42,9 +43,6 @@ public class MainController implements Initializable {
     private Canvas trackCanvas;
 
     @FXML
-    private TextArea txtAreaEditor;
-
-    @FXML
     private Label lblCurrentState;
 
     @FXML
@@ -70,6 +68,9 @@ public class MainController implements Initializable {
 
     @FXML
     private Button btnPause;
+
+    @FXML
+    private Button btnCode;
 
     private GraphicsContext trackGraphicsContext;
 
@@ -119,7 +120,7 @@ public class MainController implements Initializable {
 
     private void drawTapes(TuringModel turingModel) throws TuringMachineException {
         final int spaceBetweenTapes = 30;
-        Point2D pos = new Point2D(0, PADDING_Y);
+        Point2D pos = new Point2D(5, PADDING_Y);
         for (Tape tape: turingModel.getTapes()) {
             double cols = 0;
             for (Cell cell: tape.getCellsInRange()) {
@@ -159,7 +160,7 @@ public class MainController implements Initializable {
     private void drawBox() {
         double height = trackCanvas.getHeight();
         int tapeWidth = Tape.MAX_VISIBLE_CELLS * CELL_SIZE + 10;
-        final double boxWidth = 45;
+        final double boxWidth = 50;
         final double boxHeight = height - PADDING_Y * 2;
 
         trackGraphicsContext.setFill(Color.BLACK);
@@ -231,10 +232,17 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    private void onEditorClick(MouseEvent mouseEvent) {
+        CodeEditorDialog codeEditorDialog = new CodeEditorDialog();
+        codeEditorDialog.setCode(TuringMachine.getInstance().getCodeStr());
+        codeEditorDialog.showAndWaitForResult();
+    }
+
+    @FXML
     private void onParseClick(MouseEvent mouseEvent) {
         log.debug("on parse clicked!");
         try {
-            TuringMachine.getInstance().parseAndDetermineState(txtAreaEditor.getText());
+            TuringMachine.getInstance().parseAndDetermineState();
             setStatesValue(TuringMachine.getInstance().getStates());
             lblCurrentState.setText(TuringMachine.getInstance()
                     .getCurrentState().getName());
@@ -242,7 +250,7 @@ public class MainController implements Initializable {
             btnStep.setDisable(false);
             btnStart.setDisable(false);
             btnPause.setDisable(false);
-            txtAreaEditor.setEditable(false);
+            btnCode.setDisable(true);
         } catch (CmdException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -252,7 +260,7 @@ public class MainController implements Initializable {
             btnStep.setDisable(true);
             btnStart.setDisable(true);
             btnPause.setDisable(true);
-            txtAreaEditor.setEditable(true);
+            btnCode.setDisable(false);
         }
     }
 
@@ -335,7 +343,7 @@ public class MainController implements Initializable {
     private void reset() {
         resetButtons();
         edtStates.clear();
-        txtAreaEditor.setEditable(true);
+        btnCode.setDisable(false);
         clearFieldCanvas();
         TuringMachine.getInstance().reset();
         lblCurrentState.setText("--");
