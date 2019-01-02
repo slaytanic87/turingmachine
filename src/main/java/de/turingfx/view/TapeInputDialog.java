@@ -8,7 +8,7 @@ import javafx.scene.control.TextInputDialog;
 public class TapeInputDialog extends TextInputDialog {
 
     public TapeInputDialog() {
-        super.setContentText("Enter input (max. 13 characters):");
+        super.setContentText("Enter input:");
     }
 
    public TapeInputDialog withTitle(String title) {
