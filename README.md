@@ -65,6 +65,10 @@ Explanation: On state `S1` when `a` was read, write `b` and then shift the head 
 | `L`               | Shift the head to the left on the next transition  |
 | `N`               | Don't shift the head on the next transition        |
 
+##### Limitations
+
+Currently limited up to 7 tapes.
+
 #### Code examples 
 
 ##### 1 Tape TM
