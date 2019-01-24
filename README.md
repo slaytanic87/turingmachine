@@ -131,3 +131,8 @@ S4 # # # -> $ $ $ END N N N
 
 for input: aaabbbccc -> Accepted!<br>
 for input: aabccc -> Declined!  
+
+License
+=======
+
+[MIT](http://en.wikipedia.org/wiki/MIT_License) license © Lam
