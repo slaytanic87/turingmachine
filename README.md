@@ -10,7 +10,7 @@ manipulates symbols on a strip of tape to a table of rules.
 
 #### Screenshots
 
-![Screenshot](screenshot.png){:height="70%" width="70%"}
+![Screenshot](screenshot.png){ width=70\% }
 
 ### How Tos
 
