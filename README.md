@@ -10,7 +10,7 @@ manipulates symbols on a strip of tape to a table of rules.
 
 #### Screenshots
 
-<img src="screenshot.png" width="245" height="265">
+<img src="screenshot.png" width="490" height="530">
 
 ### How Tos
 
